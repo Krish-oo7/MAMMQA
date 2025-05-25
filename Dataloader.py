@@ -49,7 +49,7 @@ def csv_to_markdown(csv_string):
 # --- MultiModalQADataLoader (modified) ---
 class MultiModalQADataLoader:
     def __init__(self, dev_file, tables_file, texts_file, images_file, 
-                 images_base_url="path/to/local_images", encode_images=False):
+                 images_base_url="path/to/local_images",  encode_images=False):
         self.dev_file = dev_file
         self.tables_file = tables_file
         self.texts_file = texts_file
@@ -114,6 +114,7 @@ class MultiModalQADataLoader:
         if self.encode_images:
             image_dict["encoded_image"] = encode_image(full_path, "jpeg")
         return image_dict
+
 
     def build_lookup(self):
         self.table_lookup = { entry.get("id"): self.parse_table(entry)
@@ -261,10 +262,15 @@ class ManymodalQADataLoader:
             "answer": answer
         }
 
-# --- Unified Loader Wrapper ---
+
 class UnifiedQADataLoader:
-    def __init__(self, dataset_type, **kwargs):
+    def __init__(self, dataset_type, captions_file=None, **kwargs):
         self.dataset_type = dataset_type.lower()
+        self.captions = None
+        if captions_file:
+            with open(captions_file, "r") as f:
+                self.captions = json.load(f)
+
         if self.dataset_type == "multimqa":
             self.loader = MultiModalQADataLoader(
                 dev_file=kwargs.get("dev_file"),
@@ -272,7 +278,7 @@ class UnifiedQADataLoader:
                 texts_file=kwargs.get("texts_file"),
                 images_file=kwargs.get("images_file"),
                 images_base_url=kwargs.get("images_base_url"),
-                encode_images=kwargs.get("encode_images", False)
+                encode_images=kwargs.get("encode_images", False),
             )
         elif self.dataset_type == "manymqa":
             self.loader = ManymodalQADataLoader(
@@ -289,35 +295,73 @@ class UnifiedQADataLoader:
         elif self.dataset_type == "manymqa":
             return len(self.loader.questions_data)
 
+    def get_captions_for_images(self, image_paths):
+        if not self.captions:
+            return ""
+        if self.dataset_type == "multimqa":
+            return " ".join(
+                "<caption><title>" + self.captions[os.path.basename(path).split('.')[0]]["title"] + "</title>" +
+                self.captions[os.path.basename(path).split('.')[0]]["caption"] + "</caption>\n"
+                for path in image_paths
+                if os.path.basename(path).split('.')[0] in self.captions
+            )
+        elif self.dataset_type == "manymqa":
+            captions = []
+            for path in image_paths:
+                key = os.path.basename(path).split('.')[0]
+                if key in self.captions:
+                    caption = self.captions[key].get("caption", "")
+                    captions.append(f"<caption>{caption}</caption>\n")
+                else:
+                    captions.append("")
+            return " ".join(captions)
+        else:
+            return ""
+
     def get_agent_inputs(self, index):
         data = self.loader.get_agent_inputs(index)
-        if self.dataset_type == "manymqa" and data is not None:
-
+        if data is None:
+            return None
+        
+        if self.dataset_type == "manymqa":
             # Convert singular 'image' key to 'images' list for consistency.
             data["images"] = [data.pop("image")]
+
+        image_paths = data.get("images", [])
+        data["captions"] = self.get_captions_for_images(image_paths)
+
         return data
+
     
 
 if __name__ == "__main__":
     # Initialize the unified dataloader.
     # dataloader = UnifiedQADataLoader(
-    # dataset_type="multimqa",
-    # dev_file= "Full_Multimodal_dev.jsonl",
-    # tables_file= "dataset/MMQA_tables.jsonl",
-    # texts_file= "dataset/MMQA_texts.jsonl",
-    # images_file= "dataset/MMQA_images.jsonl",
-    # images_base_url= "final_dataset_images",
-    # encode_images=False
+    #     dataset_type="multimqa",
+    #     dev_file="./data/MultiModalQA/endgame_dev_filtered_data.json",
+    #     tables_file="./data/MultiModalQA/MMQA_tables.jsonl",
+    #     texts_file="./data/MultiModalQA/MMQA_texts.jsonl",
+    #     images_file="./data/MultiModalQA/MMQA_images.jsonl",
+    #     images_base_url="./data/MultiModalQA/final_dataset_images",
+    #     captions_file="./data/MultiModalQA/MultiModelQA_Captions.json",
+    #     encode_images=False
     # )
 
-    dataloader = UnifiedQADataLoader(dataset_type="manymqa",
-                                     dev_file="ManyModalQAData/official_aaai_split_dev_data.json",
-                                     images_base_url="ManyModalImages",
-                                     encode_images=False)
+    dataloader = UnifiedQADataLoader(
+        dataset_type="manymqa",
+        dev_file="./data/ManyModalQA/ManyModalQAData/official_aaai_split_dev_data.json",
+        tables_file="./data/MultiModalQA/MMQA_tables.jsonl",
+        texts_file="./data/MultiModalQA/MMQA_texts.jsonl",
+        images_file="./data/MultiModalQA/MMQA_images.jsonl",
+        images_base_url="./data/ManyModalQA/ManyModalImages",
+        captions_file="./data/ManyModalQA/ManyModelQA_Captions.json",
+        encode_images=False
+    )
 
-    agent_inputs = dataloader.get_agent_inputs(9)
+
+    agent_inputs = dataloader.get_agent_inputs(100)
     print("text: ", agent_inputs["text"])
     print("Table:", agent_inputs["table"])
-    print("image:", agent_inputs["images"])
     print("modalitiy:", agent_inputs["modalities"])
+    print("captions:", agent_inputs["captions"]) 
     # print(len(dataloader.loader.unified_data))
