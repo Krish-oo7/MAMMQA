@@ -30,7 +30,10 @@ Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data
     └── ManyModalImages/     # Directory containing all image files for ManyModalQA
 
 ## How to Run the Agent
-The main execution script is Run MT Script.py. It uses multithreading for efficient evaluation and allows configuration via command-line arguments.Running MULTIMODALQARun the evaluation on the MultiModalQA benchmark:Bashpython "Run MT Script.py" \
+The main execution script is Run MT Script.py. It uses multithreading for efficient evaluation and allows configuration via command-line arguments.Running MULTIMODALQARun the evaluation on the 
+
+MultiModalQA benchmark:Bash
+python "Run MT Script.py" \
     --dataset_type "multimqa" \
     --dev_file "./data/MultiModalQA/endgame_dev_filtered_data.json" \
     --tables_file "./data/MultiModalQA/MMQA_tables.jsonl" \
@@ -41,7 +44,10 @@ The main execution script is Run MT Script.py. It uses multithreading for effici
     --results_csv "multimqa_results.csv" \
     --num_iterations 100 \
     --num_threads 16
-Running MANYMODALQARun the evaluation on the ManyModalQA benchmark.Bashpython "Run MT Script.py" \
+    
+Running MANYMODALQA
+Run the evaluation on the ManyModalQA benchmark.Bash
+python "Run MT Script.py" \
     --dataset_type "manymqa" \
     --dev_file "./data/ManyModalQA/ManyModalQAData/official_aaai_split_dev_data.json" \
     --tables_file "./data/MultiModalQA/MMQA_tables.jsonl" \
