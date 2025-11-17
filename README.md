@@ -9,7 +9,7 @@ Arizona State University
 
 This repository contains the official implementation of **MAMMQA**, a **prompt-driven, multi-agent system** for multimodal question answering (MMQA).
 
-![MAMMQA Framework] (https://github.com/Krish-oo7/MAMMQA/blob/main/Assets/Architecture.pdf)
+![MAMMQA Framework](https://github.com/Krish-oo7/MAMMQA/blob/main/Assets/Architecture.pdf)
 
 The framework decomposes reasoning across **three interpretable agents**:
 
