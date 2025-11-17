@@ -22,22 +22,12 @@ Unlike traditional monolithic or fine-tuned MMQA models, MAMMQA is **zero-shot**
 ---
 
 ## Dataset Preparation
-Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data directory, e.g., data/.Download the datasets and structure the files to match the paths expected by the Dataloader.py and Run MT Script.py scripts.The expected directory structure should be:
-data/
-├── MultiModalQA/ \
-│   ├── endgame_dev_filtered_data.json \
-│   ├── MMQA_tables.jsonl \
-│   ├── MMQA_texts.jsonl \
-│   ├── MMQA_images.jsonl \
-│   └── final_dataset_images/  # Directory containing all image files \
-└── ManyModalQA/ \
-    └── ManyModalImages/     # Directory containing all image files for ManyModalQA \
+Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data directory, the datasets and structure the files to match the paths expected by the Dataloader.py and Run_MT_Script.py scripts.
 
 ## How to Run the Agent
-The main execution script is Run MT Script.py. It uses multithreading for efficient evaluation and allows configuration via command-line arguments.Running MULTIMODALQARun the evaluation on the 
-
-MultiModalQA benchmark:Bash
-python "Run MT Script.py" \
+The main execution script is Run MT Script.py. It uses multithreading for efficient evaluation and allows configuration via command-line arguments. Running MULTIMODALQARun the evaluation on the MultiModalQA benchmark: \
+```python
+python "Run_MT_Script.py" \
     --dataset_type "multimqa" \
     --dev_file "./data/MultiModalQA/endgame_dev_filtered_data.json" \
     --tables_file "./data/MultiModalQA/MMQA_tables.jsonl" \
@@ -48,9 +38,11 @@ python "Run MT Script.py" \
     --results_csv "multimqa_results.csv" \
     --num_iterations 100 \
     --num_threads 16
+```
     
 Running MANYMODALQA
-Run the evaluation on the ManyModalQA benchmark.Bash
+Run the evaluation on the ManyModalQA benchmark:
+```python
 python "Run MT Script.py" \
     --dataset_type "manymqa" \
     --dev_file "./data/ManyModalQA/ManyModalQAData/official_aaai_split_dev_data.json" \
@@ -62,3 +54,4 @@ python "Run MT Script.py" \
     --results_csv "manymqa_results.csv" \
     --num_iterations 100 \
     --num_threads 16
+```
