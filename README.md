@@ -1,6 +1,6 @@
 # Rethinking Information Synthesis in Multimodal Question Answering A Multi-Agent Perspective 
 **Paper:** [*Rethinking Information Synthesis in Multimodal Question Answering: A Multi-Agent Perspective*](https://arxiv.org/abs/2505.20816) 📚📊🔍\
-**Authors:** Tejas Anvekar*, Krishna Singh Rajput*, Chitta Baral, Vivek Gupta  
+**Authors:** Tejas Anvekar, Krishna Singh Rajput, Chitta Baral, Vivek Gupta  
 Arizona State University  
 
 ---
