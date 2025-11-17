@@ -18,24 +18,6 @@ def process_image(base_list):
     return images
 
 
-
-
-
-# #Gemini Keys
-# API_KEYS =  ["AIzaSyCr2U6h2ocuGgPHpD7vPlDZMMoG3046F7E",
-#              "AIzaSyBrTrxfg0jBm02MEB9kPEVUN2-l6zvm6L4",
-#              "AIzaSyDkkIB9jFiX-Cwssr2dYTNhiNKnFPVAW-8",
-#              "AIzaSyAALJuLKKPMf50wg8IRbTmRYaO4I2tcYs0",
-#              "AIzaSyByoHH19yBnx6e1zmq7N05gvt7EUE35MLk",
-#              "AIzaSyA5tDhYn4gcN07-MT4HynlXVed4a9n8rPA",
-#              "AIzaSyCNpwhy1jxNeyf9D0v1oKvSiw3wxySY0Qo",
-#              "AIzaSyAf8R1KA7vvvPXdEV0kVKQUfIBIpLuUlgk",
-#              "AIzaSyDv-JDBRgLmx6wFquT13sOfupY4cPQ2SVU",
-#              "AIzaSyCWBb_9o6I-j_VyGtzgp_HdgPZkW7GMCuc",
-#              "AIzaSyBE_ikRJZKLoWxe9yJNjsZnQ6rvPzWOqwg"]
-
-
-
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
