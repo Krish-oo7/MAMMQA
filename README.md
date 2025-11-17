@@ -20,6 +20,28 @@ The framework decomposes reasoning across **three interpretable agents**:
 Unlike traditional monolithic or fine-tuned MMQA models, MAMMQA is **zero-shot**, modular, and **LLM-agnostic**, compatible with both **OpenAI GPT-4o**, **Gemini 1.5-Flash**, and **Qwen2.5-VL** models.
 
 ---
+## ⚙️ Setup and Installation
+1. Prerequisites
+Ensure you have **Python 3.8+** installed.
+
+2. Dependencies
+Install the required Python packages using pip:
+```Bash
+pip install pandas openai tqdm python-dotenv
+```
+3. API Key Configuration
+The agents rely on the `openai` library to interface with various Large Language Models (LLMs) (e.g., GPT-4o-mini, Qwen, Gemini).
+
+Create a file named `.env` in the root directory of the repository.
+
+Add your API key for the chosen model (e.g., OpenAI or DashScope) to the file. The `My Agents.py` file uses environment variables like `DASHSCOPE_API_KEY` or `OPENAI_API_KEY`.
+
+Example `.env` content:
+```
+OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# Or
+# DASHSCOPE_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
 
 ## Dataset Preparation
 Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data directory, the datasets and structure the files to match the paths expected by the Dataloader.py and run_mt_script.py scripts.
