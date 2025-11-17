@@ -1,5 +1,5 @@
-# MAMMQA: Multi-Agent Framework for Multimodal Question Answering  
-**Paper:** *Rethinking Information Synthesis in Multimodal Question Answering: A Multi-Agent Perspective*  
+# Rethinking Information Synthesis in Multimodal Question Answering A Multi-Agent Perspective 
+**Paper:** [*Rethinking Information Synthesis in Multimodal Question Answering: A Multi-Agent Perspective*](https://arxiv.org/abs/2505.20816) 📚📊🔍\
 **Authors:** Krishna Singh Rajput, Tejas Anvekar, Chitta Baral, Vivek Gupta  
 Arizona State University  
 
@@ -54,4 +54,17 @@ python "Run MT Script.py" \
     --results_csv "manymqa_results.csv" \
     --num_iterations 100 \
     --num_threads 16
+```
+
+## 📖 Cite us:  
+```bibtex
+@misc{rajput2025rethinkinginformationsynthesismultimodal,
+      title={Rethinking Information Synthesis in Multimodal Question Answering A Multi-Agent Perspective}, 
+      author={Krishna Singh Rajput and Tejas Anvekar and Chitta Baral and Vivek Gupta},
+      year={2025},
+      eprint={2505.20816},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.20816}, 
+}
 ```
