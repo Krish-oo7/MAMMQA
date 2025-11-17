@@ -22,12 +22,12 @@ Unlike traditional monolithic or fine-tuned MMQA models, MAMMQA is **zero-shot**
 ---
 
 ## Dataset Preparation
-Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data directory, the datasets and structure the files to match the paths expected by the Dataloader.py and Run_MT_Script.py scripts.
+Our experiments use the MULTIMODALQA and MANYMODALQA datasets.Create a root data directory, the datasets and structure the files to match the paths expected by the Dataloader.py and run_mt_script.py scripts.
 
 ## How to Run the Agent
 The main execution script is Run MT Script.py. It uses multithreading for efficient evaluation and allows configuration via command-line arguments. Running MULTIMODALQARun the evaluation on the MultiModalQA benchmark: \
 ```python
-python "Run_MT_Script.py" \
+python "run_mt_script.py" \
     --dataset_type "multimqa" \
     --dev_file "./data/MultiModalQA/endgame_dev_filtered_data.json" \
     --tables_file "./data/MultiModalQA/MMQA_tables.jsonl" \
@@ -43,7 +43,7 @@ python "Run_MT_Script.py" \
 Running MANYMODALQA
 Run the evaluation on the ManyModalQA benchmark:
 ```python
-python "Run MT Script.py" \
+python "run_mt_script.py" \
     --dataset_type "manymqa" \
     --dev_file "./data/ManyModalQA/ManyModalQAData/official_aaai_split_dev_data.json" \
     --tables_file "./data/MultiModalQA/MMQA_tables.jsonl" \
